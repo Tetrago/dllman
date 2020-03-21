@@ -7,5 +7,6 @@ Cross-platform runtime DLL manager.
 4. Free any created libraryes with `dm_free`. Freeing a loaded library WILL unload it.
 
 ## Compatibility
-* [x] MSVC  support
-* [x] libdl support
+* [x] MSVC
+* [x] libdl
+* [ ] Mono
