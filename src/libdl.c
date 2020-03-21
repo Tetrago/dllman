@@ -1,18 +1,18 @@
 #include "dllman.h"
 
 #include <stdlib.h>
-#include <Windows.h>
+#include <dlfcn.h>
 
 void dm_load(DmLibrary* library, const char* name)
 {
-	library->lib_ = (void*)LoadLibrary(name);
+	library->lib_ = dlopen(name, RTLD_LAZY);
 }
 
 void dm_unload(DmLibrary* library)
 {
 	if(library->lib_)
 	{
-		FreeLibrary((HINSTANCE)library->lib_);
+		dlclose(library->lib_);
 	}
 }
 
@@ -20,7 +20,7 @@ void* dm_get(DmLibrary* library, const char* name)
 {
 	if(library->lib_)
 	{
-		return GetProcAddress(library->lib_, name);
+		return dlsym(library->lib_, name);
 	}
 	else
 	{

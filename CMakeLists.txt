@@ -7,7 +7,12 @@ if(MSVC)
 	list(APPEND dllman_SOURCES
 		"src/msvc.c"
 		)
+elseif(UNIX)
+	list(APPEND dllman_SOURCES
+		"src/libdl.c"
+		)
 endif()
+
 
 add_library(dllman STATIC ${dllman_SOURCES})
 

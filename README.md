@@ -8,4 +8,4 @@ Cross-platform runtime DLL manager.
 
 ## Compatibility
 * [x] MSVC  support
-* [ ] libdl support
+* [x] libdl support
