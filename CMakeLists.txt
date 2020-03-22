@@ -6,11 +6,7 @@ set(dllman_SOURCES)
 option(NATIVE "Native support." ON)
 if(NATIVE)
 	list(APPEND dllman_SOURCES
-		"src/native.c"
-		)
-elseif(UNIX)
-	list(APPEND dllman_SOURCES
-		"src/libdl.c"
+		"src/native.cpp"
 		)
 endif()
 
