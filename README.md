@@ -1,10 +1,12 @@
 Cross-platform runtime DLL manager.
 
 ## Usage
-1. dllman stores all related data in a `DmLibrary` struct, of which can be created with `dm_new`.
-2. Librares can be loaded and unloaded via `dm_load` and `dm_unload`. Loading WILL NOT unload a loaded library and unload WILL check if a library has been loaded.
-3. `dm_get` can be used to get functions.
-4. Free any created libraryes with `dm_free`. Freeing a loaded library WILL unload it.
+1. dllman stores all related data in a `ddlman::Library<T>` class, where T is an enum `dllman::Support` (values listed below).
+2. Librares can be loaded and unloaded via the `load` and `unload` methods of a library object. Loading WILL unload a loaded library and unload WILL check if a library has been loaded. Note that the destructor WILL unload a loaded library.
+3. The `get` method can be used to get pointers.
+
+Support:
+- `Native`
 
 ## Compatibility
 
