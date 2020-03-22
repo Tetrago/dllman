@@ -14,4 +14,4 @@ Cross-platform runtime DLL manager.
 | [x]     | libdl               | Native (UNIX)     |NATIVE_LIBDL   |
 | [ ]     | Mono                | Mono              |CS_MONO        |
 | [ ]     | CoreClrHost.h       | .NET Core <  3.0  |CS_DNC_CORECLR |
-| [ ]     | nethost and hostfxr | .NET Core >= 3.0  |CS_DNC_HSOTFXR |
+| [ ]     | nethost and hostfxr | .NET Core >= 3.0  |CS_DNC_HOSTFXR |
