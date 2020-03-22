@@ -10,14 +10,13 @@ namespace dllman
 {
 	Library<Support::Native>::~Library()
 	{
-		if(library_)
-		{
-			unload();
-		}
+		unload();
 	}
 
 	bool Library<Support::Native>::load(const std::string& path)
 	{
+		unload();
+		
 #if defined(DLLMAN_WINDOWS)
 		library_ = LoadLibrary(path.c_str());
 #else
