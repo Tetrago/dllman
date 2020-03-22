@@ -5,7 +5,7 @@ Cross-platform runtime DLL manager.
 2. Librares can be loaded and unloaded via the `load` and `unload` methods of a library object. Loading WILL unload a loaded library and unload WILL check if a library has been loaded. Note that the destructor WILL unload a loaded library.
 3. The `get` method can be used to get pointers.
 
-`dllman::Support`:
+Support:
 - `Native`
 
 ## Compatibility
