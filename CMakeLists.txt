@@ -3,9 +3,10 @@ project(dllman)
 
 set(dllman_SOURCES)
 
-if(MSVC)
+option(NATIVE "Native support." ON)
+if(NATIVE)
 	list(APPEND dllman_SOURCES
-		"src/msvc.c"
+		"src/native.c"
 		)
 elseif(UNIX)
 	list(APPEND dllman_SOURCES
