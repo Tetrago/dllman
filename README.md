@@ -10,3 +10,5 @@ Cross-platform runtime DLL manager.
 * [x] MSVC
 * [x] libdl
 * [ ] Mono
+* [ ] CoreClrHost
+* [ ] nethost and hostfxr
