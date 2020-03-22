@@ -7,8 +7,10 @@ Cross-platform runtime DLL manager.
 4. Free any created libraryes with `dm_free`. Freeing a loaded library WILL unload it.
 
 ## Compatibility
-* [x] Windows.h
-* [x] libdl
-* [ ] Mono
-* [ ] CoreClrHost.h
-* [ ] nethost and hostfxr
+|Support|Implmenation         |Language           |
+|:-----:|---------------------|-------------------|
+| [x]   | Windows.h           | Native (Windows)  |
+| [x]   | libdl               | Native (UNIX)     |
+| [ ]   | Mono                | Mono              |
+| [ ]   | CoreClrHost.h       | .NET Core <  3.0  |
+| [ ]   | nethost and hostfxr | .NET Core >= 3.0  |
