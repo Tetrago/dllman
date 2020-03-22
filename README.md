@@ -9,4 +9,4 @@ Cross-platform runtime DLL manager.
 ## Compatibility
 * [x] MSVC
 * [x] libdl
-* [ ] .NET Core 3.X
+* [ ] Mono
