@@ -8,10 +8,10 @@ Cross-platform runtime DLL manager.
 
 ## Compatibility
 
-| Support                  | Implmenation        | Language          | CMake Option  |
-|:------------------------:|---------------------|-------------------|---------------|
-|{% octicon check %}       | Windows.h           | Native (Windows)  |NATIVE_WIN     |
-|{% octicon check %}       | libdl               | Native (UNIX)     |NATIVE_LIBDL   |
-|{% octicon circle-slash %}| Mono                | Mono              |CS_MONO        |
-|{% octicon circle-slash %}| CoreClrHost.h       | .NET Core <  3.0  |CS_DNC_CORECLR |
-|{% octicon circle-slash %}| nethost and hostfxr | .NET Core >= 3.0  |CS_DNC_HOSTFXR |
+| Support        | Implmenation        | Language          | CMake Option  |
+|:--------------:|---------------------|-------------------|---------------|
+|Functions Only  | Windows.h           | Native (Windows)  |NATIVE_WIN     |
+|Functions Only  | libdl               | Native (UNIX)     |NATIVE_LIBDL   |
+|No Support      | Mono                | Mono              |CS_MONO        |
+|No Support      | CoreClrHost.h       | .NET Core <  3.0  |CS_DNC_CORECLR |
+|No Support      | nethost and hostfxr | .NET Core >= 3.0  |CS_DNC_HOSTFXR |
