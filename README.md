@@ -57,6 +57,7 @@ int main()
 
 ##### Notice:
 Compiling an executable `csproj` with `dotnet publish --self-contained` WILL create necessary runtime libs in the same output folder. This method will be used in the example. You can manually specify a folder as the second `LoadDesc` parameter. These folders can be found with `dotnet --list-runtimes`.
+You can use the function `locate_runtime_library_path` to attempt to locate latest runtime. The first parameter is an optional preferred version that will be returned if found, otherwise latest.
 
 `Utils.cs` compiled into `Test.dll`:
 ```

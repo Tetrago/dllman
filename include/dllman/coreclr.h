@@ -6,6 +6,8 @@
 
 namespace dllman
 {
+	std::filesystem::path locate_runtime_library_path(const std::string& preferredVersion = "");
+
 	class CoreClrLibrary : public Library
 	{
 	public:

@@ -1,5 +1,10 @@
 #include "dllman/coreclr.h"
 
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <regex>
+
 #include "coreclrhost.h"
 
 #if defined(DLLMAN_WINDOWS)
@@ -19,8 +24,49 @@
 
 #endif
 
+namespace
+{
+	const std::string RUNTIME_LIST_FILE = "runtime_list";
+}
+
 namespace dllman
 {
+	std::filesystem::path locate_runtime_library_path(const std::string& preferredVersion)
+	{
+		// Copy command output into string.
+		std::system(("dotnet --list-runtimes > " + RUNTIME_LIST_FILE).c_str());
+		std::ifstream dump{ RUNTIME_LIST_FILE };
+
+		std::string runtimesRaw{ (std::istreambuf_iterator<char>(dump)), std::istreambuf_iterator<char>() };
+
+		dump.close();
+		std::filesystem::remove(RUNTIME_LIST_FILE);
+
+		// Regex match command output
+
+		static std::regex regex{ R"(^Microsoft.NETCore.App ([\d\.]+) \[([\w:\\/\. ]+)\])" };
+
+		// Command lists versions in ascending order therefore we only need to store the last data.
+
+		std::filesystem::path path_{};
+
+		std::smatch matches;
+		while(std::regex_search(runtimesRaw, matches, regex))
+		{
+			path_ = matches.str(2);
+			path_ /= matches.str(1);
+
+			runtimesRaw = runtimesRaw.substr(matches.position() + matches.length());
+
+			if(matches.str(1) == preferredVersion)
+			{
+				return path_;
+			}
+		}
+
+		return path_;
+	}
+
 	CoreClrLibrary::~CoreClrLibrary()
 	{
 		unload();
