@@ -108,8 +108,8 @@ All classes extend `Library` and have the methods as shown:
 | Name    | Parameters | Function                                                                 |
 |---------|------------|--------------------------------------------------------------------------|
 | load    | LoadDesc   | Loads library. Will unload existing and will be unloaded on destruction. |
-| unload  | GetDesc    | Unloads library.                                                         |
-| get     |            | Gets a method from loaded library or `nullptr` when none is loaded.      |
+| unload  |            | Unloads library.                                                         |
+| get     | GetDesc    | Gets a method from loaded library or `nullptr` when none is loaded.      |
 
 GetDesc
 - `name_`:        Name to get.
