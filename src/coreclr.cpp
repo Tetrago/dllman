@@ -45,9 +45,9 @@ namespace dllman
 		// Loading library
 		lib_.load({ coreClrPath });
 
-		initialize_ = lib_.get({ "coreclr_initialize" });
-		createDelegate_ = lib_.get({ "coreclr_create_delegate" });
-		shutdown_ = lib_.get({ "coreclr_shutdown" });
+		initialize_ = reinterpret_cast<coreclr_initialize_ptr>(lib_.get({ "coreclr_initialize" }));
+		createDelegate_ = reinterpret_cast<coreclr_create_delegate_ptr>(lib_.get({ "coreclr_create_delegate" }));
+		shutdown_ = reinterpret_cast<coreclr_shutdown_ptr>(lib_.get({ "coreclr_shutdown" }));
 
 		std::string tpaList;
 		buildTpaList(coreClrPath.parent_path(), tpaList);
@@ -61,7 +61,7 @@ namespace dllman
 		const char* propertyValues[]{ tpaList.c_str() };
 		assemblyName_ = desc.path_.stem().string();
 
-		return static_cast<coreclr_initialize_ptr>(initialize_)(
+		return reinterpret_cast<coreclr_initialize_ptr>(initialize_)(
 			std::filesystem::current_path().u8string().c_str(),
 			assemblyName_.c_str(),
 			sizeof(propertyKeys) / sizeof(char*),
@@ -74,7 +74,7 @@ namespace dllman
 	void CoreClrLibrary::unload()
 	{
 		if(!handle_) return;
-		static_cast<coreclr_shutdown_ptr>(shutdown_)(handle_, domain_);
+		reinterpret_cast<coreclr_shutdown_ptr>(shutdown_)(handle_, domain_);
 		handle_ = nullptr;
 	}
 
@@ -84,7 +84,7 @@ namespace dllman
 
 		void* delegate;
 
-		static_cast<coreclr_create_delegate_ptr>(createDelegate_)(
+		reinterpret_cast<coreclr_create_delegate_ptr>(createDelegate_)(
 			handle_,
 			domain_,
 			assemblyName_.c_str(),

@@ -16,7 +16,7 @@ namespace dllman
 {
 	struct GetDesc
 	{
-		std::string name_;		// Method name.
+		std::string name_;		// Name.
 		std::string typeName_;	// Type name (CoreClr only) which includes the namespace.
 	};
 
