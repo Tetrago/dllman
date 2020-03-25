@@ -1,47 +1,57 @@
 #pragma once
 
-#include <stdlib.h>
+#include <filesystem>
+#include <string>
+#include <memory>
 
-#if defined(_MSC_VER)
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 #define DLLMAN_WINDOWS
+#elif __APPLE__
+#define DLLMAN_APPLE
+#else
+#define DLLMAN_UNIX
 #endif
 
-typedef enum DmMode
+namespace dllman
 {
-	Native
-} DmMode;
+	struct GetDesc
+	{
+		std::string name_;		// Method name.
+		std::string typeName_;	// Type name (CoreClr only) which includes the namespace.
+	};
 
-typedef struct DmLibrary
-{
-	/**
-	 * @brief	Load library by name. WILL unload existing library.
-	 *
-	 * @param	path	Path to library.
-	 *
-	 * @return	Success of load.
-	 */
-	int(*load)(struct DmLibrary*, const char*);
+	struct LoadDesc
+	{
+		std::filesystem::path path_;			// Library path.
+		std::filesystem::path runtimeLibs_;		// Path to runtime libraries, if empty path_ will be used (CoreClrLibrary ONLY).
+	};
 
-	/**
-	 * @brief	Unload library.
-	 */
-	void(*unload)(struct DmLibrary*);
+	class Library
+	{
+	public:
+		virtual ~Library() {}
 
-	/**
-	 * @brief	Get a pointer from library.
-	 *
-	 * @param	name	Name to get.
-	 *
-	 * @return	Pointer or nullptr if not found.
-	 */
-	void*(*get)(struct DmLibrary*, const char*);
+		/**
+		 * @brief	Load library by name. WILL unload existing library.
+		 *
+		 * @param	desc	Load description.
+		 *
+		 * @return	Success of load.
+		 */
+		virtual bool load(const LoadDesc& desc) = 0;
 
-	/**
-	 * @brief WILL unload loaded library.
-	 */
-	void(*free)(struct DmLibrary*);
+		/**
+		 * @brief	Unload library.
+		 */
+		virtual void unload() = 0;
 
-	void* data_;
-} DmLibrary;
-
-DmLibrary* dm_new(DmMode mode);
+		/**
+		 * @brief	Get a pointer.
+		 *
+		 * @param	desc	Description.
+		 *
+		 * @return	Pointer or nullptr if not found.
+		 */
+		virtual void* get(const GetDesc& desc) = 0;
+	};
+}
