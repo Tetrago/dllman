@@ -47,7 +47,6 @@ int main()
 {
   Print lib{};
   lib.print("This is a message that will be printed.");
-  
 
   return 0;
 }
