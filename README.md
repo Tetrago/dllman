@@ -38,7 +38,7 @@ Container `main.c`:
 
 class Print
 {
-  dllman::Container<dllman::NativeLibrary> lib_{{ "print.dll" }}; // Must be before properties in file for order of initialization.
+  dllman::Container<dllman::NativeLibrary> lib_{{ "print.dll" }}; // Must be before properties in class in order to initialize first.
 public:
   void(*print)(const char*) = lib_[{ "print" }]; // GetDesc
 }
